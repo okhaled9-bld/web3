@@ -111,12 +111,14 @@ export default function Home() {
   }
 
   // Reset form and refetch tokens when transaction is confirmed
-  if (isConfirmed) {
-    setTokenName('')
-    setTokenSymbol('')
-    setInitialSupply('')
-    refetchTokens()
-  }
+  useEffect(() => {
+    if (isConfirmed) {
+      setTokenName('')
+      setTokenSymbol('')
+      setInitialSupply('')
+      refetchTokens()
+    }
+  }, [isConfirmed, refetchTokens])
 
   // Prevent hydration mismatch by not rendering wagmi content until mounted
   if (!mounted) {
